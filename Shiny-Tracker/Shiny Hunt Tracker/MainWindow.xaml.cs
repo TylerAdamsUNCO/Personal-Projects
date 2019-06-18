@@ -65,8 +65,7 @@ namespace Shiny_Hunt_Tracker
         private void updateAll(int generation, string method, int counter)
         {
             lblCounter.Content = globalCounter;
-            if (doWeHaveCharm) { imgCharm.Visibility = Visibility.Visible; }
-            else { imgCharm.Visibility = Visibility.Hidden; }
+            imgCharm.Visibility = doWeHaveCharm ? Visibility.Visible : Visibility.Hidden;
 
             int gen = generation;
             string met = method;
@@ -74,40 +73,37 @@ namespace Shiny_Hunt_Tracker
             lblCurrentGeneration.Content = gen;
             lblCurrentMethod.Content = met;
             
-            if(met == "Pokeradar" && (gen == 4 || gen == 6))
+            if(met == "Pokeradar" && count >= 1)
             {
-
+                UpdateRadar(count);
             }
             else if(met == "Masuda Method")
             {
                 if(gen == 4) { bottomOdds = 1638; }
                 if(gen == 5)
                 {
-                    if (doWeHaveCharm) { bottomOdds = 1024; }
-                    else { bottomOdds = 1365; }
+                    bottomOdds = doWeHaveCharm ? 1024 : 1365;
                 }
                 else if(gen >= 6)
                 {
-                    if (doWeHaveCharm) { bottomOdds = 512; }
-                    else { bottomOdds = 683; }
+                    bottomOdds = doWeHaveCharm ? 512 : 683;
                 }
             }
-            else if (met == "Friend Safari" && gen == 6)
+            else if (met == "Friend Safari")
             {
-                if (doWeHaveCharm) { bottomOdds = 585; }
-                else { bottomOdds = 819; }
+                bottomOdds = doWeHaveCharm ? 585 : 819;
             }
-            else if (met == "Chain Fishing" && gen == 6 && counter >= 1)
+            else if (met == "Chain Fishing" && counter >= 1)
             {
                 UpdateChainFish(count);
             }
             else if(met == "DexNav")
             {
-
+                UpdateDexNav(count);
             }
-            else if(met == "SOS")
+            else if(met == "SOS" && counter >= 1)
             {
-
+                UpdateSOS(count);
             }
             else
             {
@@ -127,56 +123,60 @@ namespace Shiny_Hunt_Tracker
             }
             else if (currentGen > 4)
             {
-                if (doWeHaveCharm && currentGen == 5)
+                if (currentGen == 5)
                 {
                     topOdds = 1;
-                    bottomOdds = 2731;
+                    bottomOdds = doWeHaveCharm ? 2731: 8192;
                 }
-                else if (doWeHaveCharm && currentGen > 5)
+                else if (currentGen > 5)
                 {
                     topOdds = 1;
-                    bottomOdds = 1365;
-                }
-                else if (!doWeHaveCharm && currentGen == 5)
-                {
-                    topOdds = 1;
-                    bottomOdds = 8192;
-                }
-                else if (!doWeHaveCharm && currentGen > 5)
-                {
-                    topOdds = 1;
-                    bottomOdds = 4096;
+                    bottomOdds = doWeHaveCharm ? 1365: 4096;
                 }
             }
         }
-        private void UpdateRadar(int counter){
 
+        private void UpdateRadar(int counter)
+        {
+            int temp = 0;
+            double prob = (65535 / (8200 - counter * 200)) / 65536.0;
+            temp = (int)prob / 100;
+            topOdds = temp;
         }
 
         private void UpdateChainFish(int counter)
         {
-            if (doWeHaveCharm)
-            {
                 if (counter < 20 && counter >= 1)
                 {
-
-                    topOdds = 2 + counter * 2 + 1;
+                    topOdds = doWeHaveCharm ? 2 + counter * 2 + 1 : counter * 2 + 1;
                     bottomOdds = 4096 / topOdds;
                     topOdds = 1;
                 }
-                if (counter >= 20) bottomOdds = 95;
-            }
-            else
-            {
-                if (counter < 20 && counter >= 1)
+                if (counter >= 20)
                 {
-
-                    topOdds = counter * 2 + 1;
-                    bottomOdds = 4096 / topOdds;
-                    topOdds = 1;
+                    bottomOdds = doWeHaveCharm ? 95 : 100;
                 }
-                if (counter >= 20) bottomOdds = 100;
-            }
+        }
+
+        private void UpdateDexNav(int Counter)
+        {
+
+        }
+
+        private void UpdateSOS(int Counter)
+        {
+                if (Counter >= 11 && Counter <= 20)
+                {
+                    bottomOdds = doWeHaveCharm ? 585 : 820;
+                }
+                else if(Counter >= 21 && Counter <= 30)
+                {
+                    bottomOdds = doWeHaveCharm ? 373 : 455;
+                }
+                else if (Counter > 30)
+                {
+                    bottomOdds = doWeHaveCharm ? 273 : 315;
+                }
         }
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

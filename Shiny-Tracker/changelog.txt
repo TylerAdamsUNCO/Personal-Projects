@@ -1,3 +1,8 @@
+Version 0.3
+- Implemented correct odds for SOS hunts.
+- Overhauled all methods to use ternary statements.
+- Other code cleanups.
+
 Version 0.2
 - Fixed a bug with the Shiny Charm and Friend Safari.
 - Fixed a bug with Masuda Method.

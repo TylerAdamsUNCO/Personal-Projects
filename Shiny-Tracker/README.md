@@ -1,4 +1,4 @@
-A WPF application designed to keep track of Shiny Pokemon hunts. Current version: 0.1
+A WPF application designed to keep track of Shiny Pokemon hunts. Current version: 0.2
 
 **Features**
 - Fully functioning counter with add, subtract, reset, and modify.
@@ -12,4 +12,5 @@ A WPF application designed to keep track of Shiny Pokemon hunts. Current version
 - Change target picture based on what hunting target is.
 
 Pokemon GIFs courtesy of www.pkparaiso.com
+
 See changelog.txt for more info.

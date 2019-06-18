@@ -27,6 +27,11 @@ namespace Shiny_Hunt_Tracker
         int topOdds = 1;
         int bottomOdds = 8192;
         bool doWeHaveCharm = false;
+        private static readonly string[] Gen2Methods = { "Soft Reset", "Random Encounter" };
+        private static readonly string[] Gen4Methods = { "Soft Reset", "Random Encounter", "Pokeradar", "Masuda Method" };
+        private static readonly string[] Gen5Methods = { "Soft Reset", "Random Encounter", "Masuda Method" };
+        private static readonly string[] Gen6Methods = { "Soft Reset", "Random Encounter", "Pokeradar", "Masuda Method", "Friend Safari", "Chain Fishing", "DexNav" };
+        private static readonly string[] Gen7Methods = { "Soft Reset", "Random Encounter", "Masuda Method", "SOS" };
 
         public MainWindow()
         {
@@ -35,7 +40,7 @@ namespace Shiny_Hunt_Tracker
             cmbGeneration.Text = "2";
             cmbMethod.Text = "Soft Reset";
             generation = Convert.ToInt32(cmbGeneration.SelectedValue.ToString());
-            method = cmbMethod.SelectedValue.ToString();
+            method = cmbMethod.SelectedItem.ToString();
             doWeHaveCharm = chkCharm.IsChecked.GetValueOrDefault();
         }
 
@@ -75,11 +80,11 @@ namespace Shiny_Hunt_Tracker
             }
             else if(met == "Masuda Method")
             {
-                if(gen == 5) { bottomOdds = 1638; }
-                if(gen == 6)
+                if(gen == 4) { bottomOdds = 1638; }
+                if(gen == 5)
                 {
-                    if (doWeHaveCharm) { bottomOdds = 1365; }
-                    else { bottomOdds = 1024; }
+                    if (doWeHaveCharm) { bottomOdds = 1024; }
+                    else { bottomOdds = 1365; }
                 }
                 else if(gen >= 6)
                 {
@@ -89,8 +94,8 @@ namespace Shiny_Hunt_Tracker
             }
             else if (met == "Friend Safari" && gen == 6)
             {
-                if (doWeHaveCharm) { bottomOdds = 819; }
-                else { bottomOdds = 585; }
+                if (doWeHaveCharm) { bottomOdds = 585; }
+                else { bottomOdds = 819; }
             }
             else if (met == "Chain Fishing" && gen == 6 && counter >= 1)
             {
@@ -176,14 +181,11 @@ namespace Shiny_Hunt_Tracker
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cmbMethod.SelectedValue != null)
-            {
                 generation = Convert.ToInt32(cmbGeneration.SelectedValue.ToString());
                 BaseOdds(generation);
-                method = cmbMethod.SelectedValue.ToString();
+                if (cmbMethod.SelectedIndex != -1) { method = cmbMethod.SelectedItem.ToString(); }
                 doWeHaveCharm = chkCharm.IsChecked.GetValueOrDefault();
                 updateAll(generation, method, globalCounter);
-            }
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -199,6 +201,47 @@ namespace Shiny_Hunt_Tracker
             bool convSucc = int.TryParse(userCounter, out tempForConversion);
             if (convSucc) globalCounter = tempForConversion;
             updateAll(generation, method, globalCounter);
+        }
+
+        private void CmbGeneration_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbGeneration.SelectedValue.ToString() == "2" || cmbGeneration.SelectedValue.ToString() == "3")
+            {
+                UpdateAvailableMethods(Gen2Methods);
+                chkCharm.IsChecked = false;
+                chkCharm.IsEnabled = false;
+            }
+            else if (cmbGeneration.SelectedValue.ToString() == "4")
+            {
+                UpdateAvailableMethods(Gen4Methods);
+                chkCharm.IsChecked = false;
+                chkCharm.IsEnabled = false;
+            }
+            else if (cmbGeneration.SelectedValue.ToString() == "5")
+            {
+                UpdateAvailableMethods(Gen5Methods);
+                chkCharm.IsEnabled = true;
+            }
+            else if (cmbGeneration.SelectedValue.ToString() == "6")
+            {
+                UpdateAvailableMethods(Gen6Methods);
+                chkCharm.IsEnabled = true;
+            }
+            else if (cmbGeneration.SelectedValue.ToString() == "7")
+            {
+                UpdateAvailableMethods(Gen7Methods);
+                chkCharm.IsEnabled = true;
+            }
+        }
+
+        private void UpdateAvailableMethods(string[] generationMethods)
+        {
+            cmbMethod.Items.Clear();
+            for (int i = 0; i < generationMethods.Length; i++)
+            {
+                cmbMethod.Items.Add(generationMethods[i]);
+            }
+            cmbMethod.SelectedItem = cmbMethod.Items[0];
         }
     }
 }

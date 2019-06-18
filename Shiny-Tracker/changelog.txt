@@ -1,0 +1,11 @@
+Version 0.2
+- Fixed a bug with the Shiny Charm and Friend Safari.
+- Fixed a bug with Masuda Method.
+- Added dynamic Combo Box for Methods to prevent impossible combinations.
+- Added enabling and disabling of Shiny Charm check for generations where it doesn't exist.
+
+Version 0.1
+Initial version.
+- Fully functioning counter with add, subtract, reset, and modify.
+- Changing shiny odds depending on counter, with Masuda Method, Friend Safari, and Chain Fishing currently functional.
+- Shiny Charm toggle for the generations that support it.

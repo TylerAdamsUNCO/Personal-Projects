@@ -1,0 +1,17 @@
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\bin\Debug\Shiny_Hunt_Tracker.exe.config
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\bin\Debug\Shiny_Hunt_Tracker.exe
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\bin\Debug\Shiny_Hunt_Tracker.pdb
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny Hunt Tracker.csprojResolveAssemblyReference.cache
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\MainWindow.g.cs
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\App.g.cs
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny_Hunt_Tracker_MarkupCompile.cache
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny_Hunt_Tracker_MarkupCompile.lref
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\MainWindow.baml
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny_Hunt_Tracker.g.resources
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny_Hunt_Tracker.Properties.Resources.resources
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny Hunt Tracker.csproj.GenerateResource.Cache
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny Hunt Tracker.csproj.CoreCompileInputs.cache
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny_Hunt_Tracker.exe
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\obj\Debug\Shiny_Hunt_Tracker.pdb
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\bin\Debug\WpfAnimatedGif.dll
+C:\Users\Tyler\source\repos\Shiny Hunt Tracker\Shiny Hunt Tracker\bin\Debug\WpfAnimatedGif.xml

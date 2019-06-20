@@ -1,3 +1,7 @@
+Version 0.4
+- Added PokeRadar functionality for Generations 4 and 6.
+- Realized that the algorithm for DexNav is actually ludicrous.
+
 Version 0.3
 - Implemented correct odds for SOS hunts.
 - Overhauled all methods to use ternary statements.

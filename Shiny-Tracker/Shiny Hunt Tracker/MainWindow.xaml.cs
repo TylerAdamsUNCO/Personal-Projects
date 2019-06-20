@@ -27,6 +27,7 @@ namespace Shiny_Hunt_Tracker
         int topOdds = 1;
         int bottomOdds = 8192;
         bool doWeHaveCharm = false;
+        //double dexNavProb = .00000006;
         private static readonly string[] Gen2Methods = { "Soft Reset", "Random Encounter" };
         private static readonly string[] Gen4Methods = { "Soft Reset", "Random Encounter", "Pokeradar", "Masuda Method" };
         private static readonly string[] Gen5Methods = { "Soft Reset", "Random Encounter", "Masuda Method" };
@@ -73,7 +74,7 @@ namespace Shiny_Hunt_Tracker
             lblCurrentGeneration.Content = gen;
             lblCurrentMethod.Content = met;
             
-            if(met == "Pokeradar" && count >= 1)
+            if(met == "Pokeradar")
             {
                 UpdateRadar(count);
             }
@@ -97,7 +98,7 @@ namespace Shiny_Hunt_Tracker
             {
                 UpdateChainFish(count);
             }
-            else if(met == "DexNav")
+            else if(met == "DexNav" && counter > 1)
             {
                 UpdateDexNav(count);
             }
@@ -138,29 +139,49 @@ namespace Shiny_Hunt_Tracker
 
         private void UpdateRadar(int counter)
         {
-            int temp = 0;
-            double prob = (65535 / (8200 - counter * 200)) / 65536.0;
-            temp = (int)prob / 100;
-            topOdds = temp;
+            double temp = 0;
+            double prob = Math.Ceiling(65535.0 / (8200 - counter * 200)) / 65536.0;
+            temp = prob * 100;
+            bottomOdds = (int)Math.Round(100 / temp);
         }
 
         private void UpdateChainFish(int counter)
         {
-                if (counter < 20 && counter >= 1)
+                if (counter <= 20 && counter >= 1)
                 {
                     topOdds = doWeHaveCharm ? 2 + counter * 2 + 1 : counter * 2 + 1;
-                    bottomOdds = 4096 / topOdds;
+                    bottomOdds = (4096 / topOdds)+1;
                     topOdds = 1;
                 }
-                if (counter >= 20)
-                {
-                    bottomOdds = doWeHaveCharm ? 95 : 100;
-                }
+                if (counter > 20) bottomOdds = doWeHaveCharm ? 96 : 100;
         }
 
         private void UpdateDexNav(int Counter)
         {
-
+            /*double temp = 0;
+            if(Counter >= 1 && Counter <= 100)
+            {
+                if (Counter % 16.66 == 0)
+                {
+                    dexNavProb += .0001;
+                }
+            }
+            if(Counter >= 101 && Counter <= 200)
+            {
+                if(Counter % 50 == 0)
+                {
+                    dexNavProb += .0001;
+                }
+            }
+            if (Counter > 200)
+            {
+                if (Counter % 100 == 0)
+                {
+                    dexNavProb += .0001;
+                }
+            }
+            double temp = dexNavProb * 100;
+            bottomOdds = (int)Math.Round(100 / temp);*/
         }
 
         private void UpdateSOS(int Counter)

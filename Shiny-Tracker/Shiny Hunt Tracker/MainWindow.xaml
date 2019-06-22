@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Shiny_Hunt_Tracker"
         mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        Title="MainWindow" Height="350" Width="525">
+        xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        Title="Shiny Tracker" Height="350" Width="525">
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="517" SelectionChanged="tabControl_SelectionChanged">
             <TabItem Header="Hunt Setup">
@@ -32,11 +33,11 @@
                         <ComboBoxItem Content="Soft Reset" HorizontalAlignment="Left" Width="132"/>
                         <ComboBoxItem Content="Random Encounter" HorizontalAlignment="Left" Width="132"/>
                     </ComboBox>
-                    <Label x:Name="lblTitle" Content="Shiny Hunt Tracker Version 0.4" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <Label x:Name="lblTitle" Content="Shiny Hunt Tracker Version 0.5" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Grid.ColumnSpan="2"/>
                     <Label x:Name="lblCharm" Content="Shiny Charm?" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Grid.ColumnSpan="2" Width="111"/>
                     <CheckBox x:Name="chkCharm" Grid.Column="1" HorizontalAlignment="Left" Margin="35,170,0,0" VerticalAlignment="Top" Height="21"/>
                     <Label x:Name="lblTargetSteup" Content="Target:" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-                    <TextBox x:Name="txtTarget" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="11,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132"/>
+                    <controls:AutoCompleteBox x:Name="txtTarget" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="11,132,0,0" VerticalAlignment="Top" Width="132" LostFocus="txtTarget_LostFocus" />
                 </Grid>
             </TabItem>
             <TabItem Header="Counter">
@@ -46,8 +47,8 @@
                         <ColumnDefinition Width="116*"/>
                         <ColumnDefinition Width="388*"/>
                     </Grid.ColumnDefinitions>
-                    <Image gif:ImageBehavior.AnimatedSource="/Images/Ivysaur.gif" x:Name="imgSprite" HorizontalAlignment="Left" Height="100" Margin="278,47,0,0" VerticalAlignment="Top" Width="100" Grid.Column="2"/>
-                    <Label x:Name="lblTarget" Content="Target" HorizontalAlignment="Left" Margin="291,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="2"/>
+                    <Image gif:ImageBehavior.AnimatedSource="/Images/quEsT.png" x:Name="imgSprite" HorizontalAlignment="Left" Height="99" Margin="238,47,0,0" VerticalAlignment="Top" Width="140" Grid.Column="2"/>
+                    <Label x:Name="lblTarget" Content="Current Target:" HorizontalAlignment="Left" Margin="3,109,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2"/>
                     <Button x:Name="btnPlus" Content="+" HorizontalAlignment="Left" Margin="3,231,0,0" VerticalAlignment="Top" Width="50" Height="50" FontSize="24" FontWeight="Bold" Click="btnPlus_Click" Grid.Column="1"/>
                     <Label x:Name="lblHunt" Content="Encounters: " HorizontalAlignment="Left" Margin="64,244,0,0" VerticalAlignment="Top" FontSize="20" Grid.Column="2"/>
                     <Label x:Name="lblCounter" Content="" HorizontalAlignment="Left" Margin="182,244,0,0" VerticalAlignment="Top" FontSize="20" Grid.Column="2" Width="66" MouseDoubleClick="lblCounter_MouseDoubleClick"/>
@@ -61,6 +62,7 @@
                     <Image x:Name="imgCharm" Grid.Column="2" HorizontalAlignment="Left" Height="70" Margin="278,166,0,0" VerticalAlignment="Top" Width="70" Source="/Images/charm.png"/>
                     <Button x:Name="btnExit_Copy" Content="Exit" HorizontalAlignment="Left" Margin="273,253,0,0" VerticalAlignment="Top" Width="105" Click="btnExit_Click" Height="28" Grid.Column="2"/>
                     <Button x:Name="btnReset" Content="Reset" Grid.Column="2" HorizontalAlignment="Left" Margin="67,217,0,0" VerticalAlignment="Top" Width="105" Height="28" Click="btnReset_Click"/>
+                    <Label x:Name="lblCurrentTarget" Content="" HorizontalAlignment="Left" Margin="50,109,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Grid.Column="2" Width="132"/>
                 </Grid>
             </TabItem>
         </TabControl>

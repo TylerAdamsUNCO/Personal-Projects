@@ -7,14 +7,14 @@
     <framework targetVersion="4.6.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Shiny_Hunt_Tracker.exe.manifest" size="6309">
+    <dependentAssembly dependencyType="install" codebase="Shiny_Hunt_Tracker.exe.manifest" size="6782">
       <assemblyIdentity name="Shiny_Hunt_Tracker.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iZRRhwDafBI1GdlWFZHKRzIIyeNTb5kH1IPLCe7DjxA=</dsig:DigestValue>
+        <dsig:DigestValue>hcNM+T89H0OSsGMuiiliO0lAVal/ya7e7z4vcJU8a2o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

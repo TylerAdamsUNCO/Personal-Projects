@@ -30,7 +30,6 @@ namespace Shiny_Hunt_Tracker
         int bottomOdds = 8192;
         bool doWeHaveCharm = false;
         static Pokemon mon = new Pokemon();
-        //double dexNavProb = .00000006;
         private static readonly string[] Gen2Methods = { "Soft Reset", "Random Encounter" };
         private static readonly string[] Gen4Methods = { "Soft Reset", "Random Encounter", "Pokeradar", "Masuda Method" };
         private static readonly string[] Gen5Methods = { "Soft Reset", "Random Encounter", "Masuda Method" };
@@ -103,7 +102,7 @@ namespace Shiny_Hunt_Tracker
             {
                 UpdateChainFish(count);
             }
-            else if (met == "DexNav" && counter > 1)
+            else if (met == "DexNav" && counter >= 1)
             {
                 UpdateDexNav(count);
             }
@@ -148,6 +147,7 @@ namespace Shiny_Hunt_Tracker
             double prob = Math.Ceiling(65535.0 / (8200 - counter * 200)) / 65536.0;
             temp = prob * 100;
             bottomOdds = (int)Math.Round(100 / temp);
+            if(counter > 40) { bottomOdds = 200; }
         }
 
         private void UpdateChainFish(int counter)
@@ -163,46 +163,29 @@ namespace Shiny_Hunt_Tracker
 
         private void UpdateDexNav(int Counter)
         {
-            /*double temp = 0;
-            if(Counter >= 1 && Counter <= 100)
-            {
-                if (Counter % 16.66 == 0)
-                {
-                    dexNavProb += .0001;
-                }
-            }
-            if(Counter >= 101 && Counter <= 200)
-            {
-                if(Counter % 50 == 0)
-                {
-                    dexNavProb += .0001;
-                }
-            }
-            if (Counter > 200)
-            {
-                if (Counter % 100 == 0)
-                {
-                    dexNavProb += .0001;
-                }
-            }
-            double temp = dexNavProb * 100;
-            bottomOdds = (int)Math.Round(100 / temp);*/
+            int rolls = doWeHaveCharm ? 3 : 1;
+            int points = 0;
+            double actualPoints = 0;
+            if(txtDexNavCounter.Text == "50") { rolls += 5; };
+            if (txtDexNavCounter.Text == "100") { rolls += 10; };
+            if (Counter >= 1 && Counter <= 100) { points = Counter * 6; }
+            if(Counter >= 101 && Counter <= 200) { points = 600 + (Counter-100 * 2); }
+            if (Counter > 200 && Counter < 1000) { points = 800 + (Counter-200); }
+            if(Counter >= 1000) { points = 1599; }
+            actualPoints = points / 100.0;
+            double prob = actualPoints / 10000.0;
+            double rollProb = 1 - prob;
+            rollProb = Math.Pow(rollProb, rolls);
+            prob = 1 - rollProb;
+            bottomOdds = (int)(1 / prob);
+            //This code ignores the 4% chance for 4 extra rolls to occur since its random.
         }
 
         private void UpdateSOS(int Counter)
         {
-            if (Counter >= 11 && Counter <= 20)
-            {
-                bottomOdds = doWeHaveCharm ? 585 : 820;
-            }
-            else if (Counter >= 21 && Counter <= 30)
-            {
-                bottomOdds = doWeHaveCharm ? 373 : 455;
-            }
-            else if (Counter > 30)
-            {
-                bottomOdds = doWeHaveCharm ? 273 : 315;
-            }
+            if (Counter >= 11 && Counter <= 20) { bottomOdds = doWeHaveCharm ? 585 : 820; }
+            else if (Counter >= 21 && Counter <= 30) { bottomOdds = doWeHaveCharm ? 373 : 455; }
+            else if (Counter > 30) { bottomOdds = doWeHaveCharm ? 273 : 315; }
         }
 
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -213,6 +196,16 @@ namespace Shiny_Hunt_Tracker
             doWeHaveCharm = chkCharm.IsChecked.GetValueOrDefault();
             updateAll(generation, method, globalCounter);
             ChangePicture(txtTarget.Text);
+            if(method == "DexNav")
+            {
+                txtDexNavCounter.Visibility = Visibility.Visible;
+                txtDexNavCounter.IsEnabled = true;
+            }
+            else
+            {
+                txtDexNavCounter.Visibility = Visibility.Hidden;
+                txtDexNavCounter.IsEnabled = false;
+            }
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)

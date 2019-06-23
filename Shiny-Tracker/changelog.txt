@@ -1,6 +1,13 @@
+Version 1.0
+- Official release!
+- Finally figured out a way to code DexNav. (Thanks MeanRoller on YouTube).
+- All hunting methods are feature complete.
+- Minor bug fixes.
+
 Version 0.5
 - Added animated images for every Pokemon sans Meltan and Melmetal.
-- Image changes to target entered via autocomplete box.
+- Target Pokemon textbox changed to AutoCompleteBox.
+- Image changes to target Pokemon.
 - Still not loving DexNav.
 
 Version 0.4

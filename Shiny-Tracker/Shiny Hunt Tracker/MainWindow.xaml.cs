@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using WpfAnimatedGif;
 using System.IO;
 
+//#BringBackNationalDex
+
 namespace Shiny_Hunt_Tracker
 {
     /// <summary>

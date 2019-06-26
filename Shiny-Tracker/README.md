@@ -1,3 +1,5 @@
+# Shiny Hunt Tracker
+
 A WPF application designed to keep track of Shiny Pokemon hunts. Current version: 1.0
 
 **Features**

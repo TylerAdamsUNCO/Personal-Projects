@@ -40,3 +40,12 @@ C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Track
 C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
 C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\WPFToolkit.dll
 C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\obj\Debug\Shiny Hunt Tracker.csprojAssemblyReference.cache
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\EntityFramework.dll
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\System.Data.SQLite.dll
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\EntityFramework.xml
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\System.Data.SQLite.xml
+C:\Users\Tyler\Documents\GitHub\Personal-Projects\Shiny-Tracker\Shiny Hunt Tracker\bin\Debug\System.Data.SQLite.dll.config

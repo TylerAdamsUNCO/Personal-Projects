@@ -1,3 +1,7 @@
+Version 1.1
+- Added data saving. Your current hunt will be saved when the app is closed.
+- Reworked images.
+
 Version 1.0
 - Official release!
 - Finally figured out a way to code DexNav. (Thanks MeanRoller on YouTube).

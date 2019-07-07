@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfAnimatedGif;
 using System.IO;
+using System.Data.SQLite;
 
 //#BringBackNationalDex
 
@@ -24,13 +25,15 @@ namespace Shiny_Hunt_Tracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        int globalCounter = 0;
+        int globalCounter;
         string odds = string.Empty;
         string method = string.Empty;
+        string target = string.Empty;
+        string charmLoad = string.Empty;
         int generation = 0;
         int topOdds = 1;
         int bottomOdds = 8192;
-        bool doWeHaveCharm = false;
+        bool doWeHaveCharm;
         static Pokemon mon = new Pokemon();
         private static readonly string[] Gen2Methods = { "Soft Reset", "Random Encounter" };
         private static readonly string[] Gen4Methods = { "Soft Reset", "Random Encounter", "Pokeradar", "Masuda Method" };
@@ -41,15 +44,50 @@ namespace Shiny_Hunt_Tracker
         public MainWindow()
         {
             InitializeComponent();
+            loadData();
             lblCounter.Content = globalCounter;
-            cmbGeneration.Text = "2";
-            cmbMethod.Text = "Soft Reset";
-            generation = Convert.ToInt32(cmbGeneration.SelectedValue.ToString());
-            method = cmbMethod.SelectedItem.ToString();
+            cmbGeneration.Text = generation.ToString();
+            cmbMethod.Text = method;
+            txtTarget.Text = target;
             doWeHaveCharm = chkCharm.IsChecked.GetValueOrDefault();
             txtTarget.ItemsSource = AllPokemon;
+            updateData();
         }
 
+        //DATA STUFF
+        private void updateData()
+        {
+            string charm = doWeHaveCharm ? "true" : "false";
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=huntData.db;"))
+            {
+                conn.Open();
+                string sql = $"update HuntData set Generation = {generation}, Method = '{method}', CurrentPokemon = '{txtTarget.Text}', HuntNumber = 1, Counter = {globalCounter}, Charm = '{charm}'";
+                SQLiteCommand command = new SQLiteCommand(sql, conn);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void loadData()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=huntData.db;"))
+            {
+                conn.Open();
+                string sql = $"select * from HuntData";
+                SQLiteCommand command = new SQLiteCommand(sql, conn);
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    generation = Convert.ToInt32(reader["Generation"]);
+                    method = reader["Method"].ToString();
+                    target = reader["CurrentPokemon"].ToString();
+                    globalCounter = Convert.ToInt32(reader["Counter"]);
+                    charmLoad = reader["Charm"].ToString();
+                }
+            }
+            chkCharm.IsChecked = charmLoad == "true" ? true : false;
+        }
+
+        //BUTTONS
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -67,6 +105,7 @@ namespace Shiny_Hunt_Tracker
             globalCounter++;
             updateAll(generation, method, globalCounter);
         }
+
         //ODDS METHODS
         private void updateAll(int generation, string method, int counter)
         {
@@ -198,6 +237,7 @@ namespace Shiny_Hunt_Tracker
             doWeHaveCharm = chkCharm.IsChecked.GetValueOrDefault();
             updateAll(generation, method, globalCounter);
             ChangePicture(txtTarget.Text);
+            updateData();
             if(method == "DexNav")
             {
                 txtDexNavCounter.Visibility = Visibility.Visible;
@@ -263,7 +303,7 @@ namespace Shiny_Hunt_Tracker
             {
                 cmbMethod.Items.Add(generationMethods[i]);
             }
-            cmbMethod.SelectedItem = cmbMethod.Items[0];
+            cmbMethod.SelectedItem = method;
         }
 
         private void ChangePicture(string pokemon)
@@ -273,7 +313,7 @@ namespace Shiny_Hunt_Tracker
 
             ImageSource quest = new BitmapImage(new Uri(fileName, UriKind.Relative));
             ImageBehavior.SetAnimatedSource(imgSprite, quest);
-            if (txtTarget.SelectedItem != null)
+            if (AllPokemon.Contains(pokemon))
             {
                 fileName = "Images/" + pokemon.ToLower() + ".gif";
                 ImageSource img = new BitmapImage(new Uri(fileName, UriKind.Relative));
@@ -288,6 +328,12 @@ namespace Shiny_Hunt_Tracker
             {
                 tb.Text = Char.ToUpper(tb.Text[0]) + tb.Text.Substring(1).ToLower();
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            doWeHaveCharm = chkCharm.IsChecked.GetValueOrDefault();
+            updateData();
         }
     }
 }
